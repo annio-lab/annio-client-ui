@@ -1,0 +1,6 @@
+apps:
+    - script: ./dist/index.js
+      name: "annio-client-ui"
+      instances: max
+      exec_mode: cluster
+      max_memory_restart: 512M

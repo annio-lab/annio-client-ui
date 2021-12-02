@@ -1,0 +1,31 @@
+.no-selectable {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+       supported by Chrome and Opera */
+}
+
+.z-top {
+    z-index: 1000 !important;
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
+.disabled {
+    color: rgb(100, 100, 100) !important;
+}

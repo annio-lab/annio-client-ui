@@ -1,0 +1,20 @@
+/* Mixin */
+/* Set các giá trị với màn hình tương ứng */
+@import '../variables/grid';
+@import '../variables/position';
+
+@each $positionType in $positions {
+    .po-#{$positionType} {
+        position: $positionType !important;
+    }
+}
+
+@each $name, $size in $grid-breakpoints {
+    @media (min-width: $size) {
+        @each $positionType in $positions {
+            .po-#{$name}-#{$positionType} {
+                position: $positionType !important;
+            }
+        }
+    }
+}

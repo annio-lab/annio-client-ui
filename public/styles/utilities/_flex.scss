@@ -1,0 +1,19 @@
+/* Mixin */
+/* Set các giá trị với màn hình tương ứng */
+@import '../variables/grid';
+
+@each $name, $size in $grid-breakpoints {
+    @media (min-width: $size) {
+        @for $i from 0 through 10 {
+            .flex-#{$name}-#{$i} {
+                flex: $i !important;
+            }
+        }
+    }
+}
+
+@for $i from 0 through 10 {
+    .flex-#{$i} {
+        flex: $i !important;
+    }
+}

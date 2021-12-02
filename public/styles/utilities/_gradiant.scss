@@ -1,0 +1,55 @@
+@mixin gradientAnimation($color1: null, $color2: null) {
+    @if ($color1 and $color2) {
+        background: linear-gradient(to right bottom, $color1, $color2);
+        background-size: 200% 200%;
+        -webkit-animation: WaveEffect 36s ease infinite;
+        -moz-animation: WaveEffect 36s ease infinite;
+        -o-animation: WaveEffect 36s ease infinite;
+        animation: WaveEffect 36s ease infinite;
+        @-webkit-keyframes WaveEffect {
+            0% {
+                background-position: 0% 32%
+            }
+            50% {
+                background-position: 100% 69%
+            }
+            100% {
+                background-position: 0% 32%
+            }
+        }
+        @-moz-keyframes WaveEffect {
+            0% {
+                background-position: 0% 32%
+            }
+            50% {
+                background-position: 100% 69%
+            }
+            100% {
+                background-position: 0% 32%
+            }
+        }
+        @-o-keyframes WaveEffect {
+            0% {
+                background-position: 0% 32%
+            }
+            50% {
+                background-position: 100% 69%
+            }
+            100% {
+                background-position: 0% 32%
+            }
+        }
+        @keyframes WaveEffect {
+            0% {
+                background-position: 0% 32%
+            }
+            50% {
+                background-position: 100% 69%
+            }
+            100% {
+                background-position: 0% 32%
+            }
+        }
+    }
+}
+

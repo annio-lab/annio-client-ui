@@ -1,0 +1,167 @@
+@import './root';
+
+.regular-theme {
+    &.default-background {
+        @include gradientAnimation(
+            var(--theme-color-primary),
+            var(--theme-color-secondary)
+        );
+    }
+
+    a {
+        color: var(--text-color-dark);
+    }
+
+    button {
+        &.disabled {
+            color: var(--text-color-dark) !important;
+        }
+    }
+
+    // #Color
+    .color-primary {
+        color: var(--color-primary) !important;
+    }
+
+    .color-secondary {
+        color: var(--color-secondary) !important;
+    }
+
+    // #Background
+    .bg-primary {
+        background-color: var(--color-primary) !important;
+    }
+
+    .bg-hover-primary {
+        &:hover {
+            background-color: var(--color-primary) !important;
+        }
+    }
+
+    .bg-secondary {
+        background-color: var(--color-secondary) !important;
+    }
+
+    .bg-hover-secondary {
+        &:hover {
+            background-color: var(--color-secondary) !important;
+        }
+    }
+
+    // #Text
+    .text-dark {
+        color: var(--text-color-dark) !important;
+    }
+
+    .text-light {
+        color: var(--text-color-light) !important;
+    }
+
+    .text-disabled {
+        color: var(--text-color-disabled) !important;
+    }
+
+    .app-title {
+        color: var(--text-color-dark) !important;
+        font-size: 1.5rem;
+        font-weight: 800;
+    }
+
+    .app-version {
+        font-size: 0.65rem;
+        font-weight: 500;
+        color: var(--color-danger);
+    }
+
+    .header {
+        height: var(--header-height);
+        background-color: var(--header-background-color);
+        box-shadow: rgb(0 0 0 / 12%) 1px 2px 4px 0px;
+        font-size: 14px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 900;
+
+        .nav-app-title {
+            color: var(--text-color-dark) !important;
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .nav-app-version {
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: var(--color-danger);
+        }
+
+        .nav-app-description {
+            color: var(--text-color-disabled);
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .nav-box {
+            display: block;
+            min-width: 60px;
+            max-width: 80px;
+            min-height: 60px;
+            max-height: 80px;
+            cursor: pointer;
+            border-radius: 5px;
+
+            .nav-icon {
+                padding: 6px !important;
+                background: var(--header-navbox-color);
+            }
+
+            .nav-title {
+                font-size: 0.75rem;
+                font-weight: 800;
+            }
+
+            a {
+                padding: 10px 0 3px 0;
+                min-height: 30px;
+                overflow: hidden;
+                color: var(--text-color-disabled);
+                border-bottom: 3px solid transparent;
+            }
+
+            &.active {
+                .nav-icon {
+                    background: var(--header-navbox-active-color);
+                }
+
+                a {
+                    color: var(--header-navbox-active-color);
+                }
+            }
+
+            &:hover {
+                .nav-icon {
+                    background: var(--header-navbox-active-color);
+                }
+
+                a {
+                    color: var(--header-navbox-active-color);
+                }
+            }
+        }
+    }
+
+    .footer {
+        font-size: 0.875rem;
+        border-top: 1px dashed var(--border-color);
+        color: var(--text-color-disabled);
+    }
+
+    .main-page {
+        top: var(--header-height);
+        min-height: calc(100vh - #{var(--header-height)});
+        position: relative;
+        background-color: var(--background-color);
+        color: var(--text-color-dark);
+    }
+}

@@ -1,0 +1,29 @@
+#
+# ---- Build ----
+FROM node:12.19-alpine as Build
+
+WORKDIR /usr/src/app
+
+COPY . .
+
+COPY package*.json ./
+
+RUN npm install
+
+RUN npm run build
+
+#
+# ---- Release ----
+FROM node:12.19-alpine as Release
+
+ARG PORT
+ARG API_URL
+
+ENV ANALYZE false
+ENV PORT $PORT
+ENV NEXT_PUBLIC_API_URL $API_URL
+ENV NODE_ENV production
+
+COPY --from=Build /usr/src/app .
+
+CMD [ "npm", "start" ]

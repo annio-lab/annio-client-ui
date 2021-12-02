@@ -1,0 +1,24 @@
+{
+    "presets": ["next/babel"],
+    "plugins": [
+        [
+            "module-resolver",
+            {
+                "root": ["./"],
+                "alias": {
+                    "@server/*": ["server/*"],
+                    "@public/*": ["public/*"],
+                    "@test/*": ["test/*"],
+                    "@shared/*": ["src/shared/*"],
+                    "@app/*": ["src/app/*"]
+                }
+            }
+        ],
+        [
+            "babel-plugin-styled-components",
+            {
+                "ssr": true
+            }
+        ]
+    ]
+}

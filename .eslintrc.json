@@ -1,0 +1,32 @@
+{
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "@next/next/no-img-element": "off",
+    "prefer-const": "error",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-indent": [2, 4, { "checkAttributes": false }],
+    "react/jsx-indent-props": [2, 4],
+    "import/prefer-default-export": "off",
+    "import/no-cycle": "off",
+    "no-multi-assign": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/no-empty-interface": "off"
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {}
+    }
+  }
+}

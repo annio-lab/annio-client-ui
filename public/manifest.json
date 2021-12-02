@@ -1,0 +1,16 @@
+{
+  "short_name": "Annio App",
+  "name": "Annio App | Shopping",
+  "icons": [
+    {
+      "src": "/fav/favicon_128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "density": "1.0"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

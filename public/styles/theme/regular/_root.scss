@@ -1,0 +1,22 @@
+:root {
+    // theme
+    --theme-color-primary: #006bf6;
+    --theme-color-secondary: #10e951;
+    // palette
+    --color-primary: #e5e5e5;
+    --color-secondary: rgba(20, 33, 61, 1);
+    --color-danger: red;
+    // text
+    --text-color-light: rgba(255, 255, 255, 1);
+    --text-color-dark: rgba(20, 33, 61, 1);
+    --text-color-content: rgba(108, 117, 125, 1);
+    --text-color-disabled: rgba(0, 0, 0, 0.5);
+    // common
+    --background-color: #f2f5f8;
+    --border-color: rgba(0, 0, 0, 0.2);
+    // header
+    --header-height: 77px;
+    --header-background-color: rgba(255, 255, 255, 1);
+    --header-navbox-color: rgba(20, 33, 61, 0.5);
+    --header-navbox-active-color: rgba(20, 33, 61, 1);
+}

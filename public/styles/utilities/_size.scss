@@ -1,0 +1,52 @@
+/* Mixin */
+/* Set các giá trị với màn hình tương ứng */
+@import '../variables/grid';
+@import '../variables/size';
+
+@each $nameSize, $valueSize in $size-breakpoints {
+    .h-#{$nameSize} {
+        height: $valueSize !important;
+    }
+    .hmin-#{$nameSize} {
+        min-height: $valueSize !important;
+    }
+    .hmax-#{$nameSize} {
+        max-height: $valueSize !important;
+    }
+
+    .w-#{$nameSize} {
+        width: $valueSize !important;
+    }
+    .wmin-#{$nameSize} {
+        min-width: $valueSize !important;
+    }
+    .wmax-#{$nameSize} {
+        max-width: $valueSize !important;
+    }
+}
+
+@each $name, $size in $grid-breakpoints {
+    @media (min-width: $size) {
+        @each $nameSize, $valueSize in $size-breakpoints {
+            .h-#{$name}-#{$nameSize} {
+                height: $valueSize !important;
+            }
+            .hmin-#{$name}-#{$nameSize} {
+                min-height: $valueSize !important;
+            }
+            .hmax-#{$name}-#{$nameSize} {
+                max-height: $valueSize !important;
+            }
+
+            .w-#{$name}-#{$nameSize} {
+                width: $valueSize !important;
+            }
+            .wmin-#{$name}-#{$nameSize} {
+                min-width: $valueSize !important;
+            }
+            .wmax-#{$name}-#{$nameSize} {
+                max-width: $valueSize !important;
+            }
+        }
+    }
+}
