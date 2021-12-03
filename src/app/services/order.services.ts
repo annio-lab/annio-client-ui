@@ -1,9 +1,9 @@
 import { HttpRequest } from '@shared/services';
+import { ORDER_STATUS } from '@annio/core/business/order/order.common';
 import {
     ICreateOrderPayload,
     IOrder,
-    ORDER_STATUS,
-} from '@app/business/order.business';
+} from '@annio/core/business/order/order.interface';
 
 export class OrderServices {
     // user info

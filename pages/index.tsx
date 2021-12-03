@@ -4,7 +4,8 @@ import { LOCALES_NAMESPACE, useTranslation } from "@server/i18n";
 import { BodyLayout } from "@shared/components";
 import { useState, useEffect, useMemo } from "react";
 import { OrderServices } from "@app/services";
-import { IOrder, ORDER_STATUS } from "@app/business/order.business";
+import { ORDER_STATUS } from "@annio/core/business/order/order.common";
+import { IOrder } from "@annio/core/business/order/order.interface";
 import { Badge, Button } from "reactstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
 
@@ -16,7 +17,6 @@ const FeedPage: NextPage<any> = () => {
     const fetchResumeInfo = (): Promise<any> => {
         setLoading(true);
         return OrderServices.getAll().then((res: IOrder[]) => {
-            console.log('res', res);
             setData(res);
         }).finally(() => setLoading(false));
     };

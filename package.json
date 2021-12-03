@@ -29,7 +29,7 @@
     "upgrade": "npx run yarn-upgrade-all"
   },
   "dependencies": {
-    "@annio/core": "1.0.4",
+    "@annio/core": "1.0.5",
     "@ckeditor/ckeditor5-build-classic": "^29.1.0",
     "@ckeditor/ckeditor5-react": "^3.0.2",
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
