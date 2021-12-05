@@ -1,8 +1,8 @@
 // @flow
 import { NextPage } from "next";
 import { LOCALES_NAMESPACE, useTranslation } from "@server/i18n";
-import { useState, useEffect, useMemo } from "react";
-import { Badge, Button } from "reactstrap";
+import { useState, useEffect, useMemo, useCallback } from "react";
+import { Alert, Badge, Button } from "reactstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
 import { ORDER_STATUS } from "@annio/core/business/order/order.common";
 import { IOrder } from "@annio/core/business/order/order.interface";
@@ -10,6 +10,7 @@ import { OrderServices } from "@app/services";
 import { CreateOrderModal } from "@app/components";
 import { BodyLayout } from "@shared/components";
 import { toast } from "react-toastify";
+import { HttpRequest } from "@shared/services";
 
 const FeedPage: NextPage<any> = () => {
     const { t } = useTranslation();
@@ -39,6 +40,26 @@ const FeedPage: NextPage<any> = () => {
             res && toast.success(`Status of id (${id}): ${res}`);
         }).finally(() => setLoading(false));
     };
+
+    const resetHerokuService = useCallback(() => {
+
+        const pingUrl = async (url: string): Promise<any> => {
+            await HttpRequest.Get(url, { baseURL: '' }).then(() => {
+                toast.success(`ping success to ${url}`);
+            }).catch((err) => {
+                if (err.statusCode === 404) {
+                    toast.success(`ping success to ${url}`);
+                    return;
+                }
+                toast.error(`ping failed to ${url}`);
+            });
+        }
+
+        setLoading(true);
+        const hosts = ['https://annio-payment-service.herokuapp.com', 'https://annio-order-service.herokuapp.com', 'https://annio-api-services.herokuapp.com'];
+        const pingUrls = hosts.map((url) => pingUrl(url));
+        Promise.all(pingUrls).finally(() => setLoading(false));
+    }, []);
 
     const orderColumns = useMemo(() => [
         {
@@ -80,7 +101,7 @@ const FeedPage: NextPage<any> = () => {
             text: t('Action'),
             headerStyle: (): any => ({ width: "100px" }),
             formatter: (_c: any, row: IOrder): any => {
-                return <div className="d-flex flex-column justify-content-around">
+                return <div className="d-flex justify-content-around">
                     {row.status !== ORDER_STATUS.CANCELLED && <Button color="danger" outline className="mr-2" onClick={(): any => cancelOrder(row.id)}>{t('Cancel')}</Button>}
                     {<Button color="dark" outline onClick={(): any => checkOrderStatus(row.id)}>{t('Check Status')}</Button>}
                 </div>;
@@ -95,6 +116,10 @@ const FeedPage: NextPage<any> = () => {
     return (
         <BodyLayout loading={loading}>
             <h2>{t('Orders')}</h2>
+            <Alert color="danger">
+                When you cannot fetch data from API (503). Please click to
+                <Button color="link" className="ml-2 px-0" onClick={resetHerokuService}>link</Button> for restart service (wakeup heroku services)
+            </Alert>
             <div className="d-flex justify-content-between action">
                 <Button color="danger" onClick={fetchAllOrders}>{t('Refresh Latest Orders')}</Button>
                 <CreateOrderModal onUpdateSuccess={(data) => {
