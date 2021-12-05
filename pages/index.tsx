@@ -34,7 +34,6 @@ const FeedPage: NextPage<any> = () => {
         setLoading(true);
         return OrderServices.checkStatus(id).then((res: ORDER_STATUS) => {
             res && alert(`Status of id (${id}): ${res}`);
-            fetchAllOrders();
         }).finally(() => setLoading(false));
     };
 
@@ -61,13 +60,13 @@ const FeedPage: NextPage<any> = () => {
             formatter: (c: ORDER_STATUS): any => {
                 switch (c) {
                     case ORDER_STATUS.CREATED:
-                        return <Badge color="primary">{c}</Badge>;
+                        return <Badge color="primary">{t('CREATED')}</Badge>;
                     case ORDER_STATUS.CONFIRMED:
-                        return <Badge color="success">{c}</Badge>;
+                        return <Badge color="success">{t('CONFIRMED')}</Badge>;
                     case ORDER_STATUS.DELIVERED:
-                        return <Badge color="warning">{c}</Badge>;
+                        return <Badge color="warning">{t('DELIVERED')}</Badge>;
                     case ORDER_STATUS.CANCELLED:
-                        return <Badge color="dark">{c}</Badge>;
+                        return <Badge color="dark">{t('CANCELLED')}</Badge>;
                     default:
                         return "_";
                 }
@@ -78,9 +77,9 @@ const FeedPage: NextPage<any> = () => {
             text: t('Action'),
             headerStyle: (): any => ({ width: "100px" }),
             formatter: (_c: any, row: IOrder): any => {
-                return <div className="d-flex justify-content-around">
-                    {row.status !== ORDER_STATUS.CANCELLED && <Button color="secondary" outline className="mr-2" onClick={(): any => cancelOrder(row.id)}>{t('Cancel')}</Button>}
-                    {<Button className="danger" outline onClick={(): any => checkOrderStatus(row.id)}>{t('Check Status')}</Button>}
+                return <div className="d-flex flex-column justify-content-around">
+                    {row.status !== ORDER_STATUS.CANCELLED && <Button color="danger" outline className="mr-2" onClick={(): any => cancelOrder(row.id)}>{t('Cancel')}</Button>}
+                    {<Button color="dark" outline onClick={(): any => checkOrderStatus(row.id)}>{t('Check Status')}</Button>}
                 </div>;
             }
         },

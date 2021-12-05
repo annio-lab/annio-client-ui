@@ -33,7 +33,10 @@ export const CreateOrderModal: FunctionComponent<IProfileSectionModal.IProps> = 
             quantity: +values.quantity,
         };
         OrderServices.create(payload)
-            .then((data) => onUpdateSuccess && onUpdateSuccess(data))
+            .then((data) => {
+                onUpdateSuccess && onUpdateSuccess(data);
+                toggleModal();
+            })
             .catch((err) => toast.error(err))
             .finally(() => setLoading(false));
     }
