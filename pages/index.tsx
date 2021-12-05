@@ -13,7 +13,7 @@ import { BodyLayout } from "@shared/components";
 const FeedPage: NextPage<any> = () => {
     const { t } = useTranslation();
     const [data, setData] = useState<IOrder[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const fetchAllOrders = (): Promise<any> => {
         setLoading(true);
@@ -96,7 +96,11 @@ const FeedPage: NextPage<any> = () => {
             <div className="d-flex justify-content-between action">
                 <Button color="danger" onClick={fetchAllOrders}>{t('Refresh Latest Orders')}</Button>
                 <CreateOrderModal onUpdateSuccess={(data) => {
-                    if (data) fetchAllOrders();
+                    if (data) {
+                        setTimeout(() => {
+                            fetchAllOrders();
+                        }, 500);
+                    }
                 }} />
             </div>
             <div className="w-100 overflow-auto mt-3">

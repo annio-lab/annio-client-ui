@@ -23,7 +23,7 @@ export const BodyLayout: React.FunctionComponent<IBodyLayout.IProps> = ({
 }): JSX.Element => {
 
     return (
-        <div className={classNames('d-flex flex-column container px-3 py-5', className)}>
+        <div className={classNames('d-flex flex-column container px-3 py-5 flex-1 position-relative', className)}>
             {loading && <Loader />}
             {children}
         </div>

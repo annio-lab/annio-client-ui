@@ -12,6 +12,9 @@ const LoaderContainer = styled.div`
     height: 100%;
     min-width: ${(props: any): any => `${props.size}px`};
     min-height: ${(props: any): any => `${props.size}px`};
+    background: rgba(255, 255, 255, .8);
+    cursor: progress;
+    z-index: 999;
 
     div {
         overflow: hidden;
@@ -30,6 +33,6 @@ export const Loader: React.FunctionComponent<ILoader.IProps> = (props): JSX.Elem
 };
 
 Loader.defaultProps = {
-    color: '#fff',
+    color: '#000',
     size: 80,
 }

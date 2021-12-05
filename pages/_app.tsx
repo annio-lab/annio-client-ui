@@ -2,10 +2,11 @@
 import React, { useEffect, useMemo } from "react";
 import { AppProps } from "next/app";
 import Head from 'next/head'
-import { useTranslation, LOCALES_NAMESPACE } from "@server/i18n";
 
+import { useTranslation, LOCALES_NAMESPACE } from "@server/i18n";
 import "@public/styles/main.scss";
 import { AppUtils } from "@app/utils";
+import { ToastContainer } from 'react-toastify';
 
 const WebApp: React.FunctionComponent<AppProps> = ({ Component, pageProps }: AppProps): JSX.Element => {
     const { i18n } = useTranslation(LOCALES_NAMESPACE.COMMON);
@@ -30,9 +31,21 @@ const WebApp: React.FunctionComponent<AppProps> = ({ Component, pageProps }: App
                 <meta name="description" content="Annio App" />
                 <title>{AppUtils.AppName}</title>
             </Head>
-            {i18nInitialized && (
-                <Component {...pageProps} />
-            )}
+            <div className="d-flex flex-column vh-100 vw-100">
+                {i18nInitialized && (
+                    <Component {...pageProps} />
+                )}
+            </div>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover />
         </>
     );
 };

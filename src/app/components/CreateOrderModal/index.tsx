@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { Modal, ModalHeader, ModalBody, Button, ModalFooter } from 'reactstrap';
-import cs from 'classnames';
 import { useForm } from "react-hook-form";
-import { HField, HForm } from "@shared/components";
+import { HField, HForm, Loader } from "@shared/components";
 import { LOCALES_NAMESPACE, useTranslation } from "@server/i18n";
 import { IProfileSectionModal } from "./CreateOrderModal";
 import { OrderServices } from "@app/services";
+import { toast } from 'react-toastify';
 
 export const CreateOrderModal: FunctionComponent<IProfileSectionModal.IProps> = ({
     onUpdateSuccess,
@@ -28,7 +28,14 @@ export const CreateOrderModal: FunctionComponent<IProfileSectionModal.IProps> = 
 
     const submitForm = (values: any): void => {
         setLoading(true);
-        OrderServices.create(values).then((data) => onUpdateSuccess && onUpdateSuccess(data)).finally(() => setLoading(true));
+        const payload = {
+            productId: values.productId,
+            quantity: +values.quantity,
+        };
+        OrderServices.create(payload)
+            .then((data) => onUpdateSuccess && onUpdateSuccess(data))
+            .catch((err) => toast.error(err))
+            .finally(() => setLoading(false));
     }
 
     // MIDDLEWARES
@@ -44,7 +51,8 @@ export const CreateOrderModal: FunctionComponent<IProfileSectionModal.IProps> = 
     return (
         <>
             <Button color="primary" onClick={toggleModal}>{t('Create Order')}</Button>
-            <Modal isOpen={modal} toggle={toggleModal} size="md" className={cs({ 'loading': loading })}>
+            <Modal isOpen={modal} toggle={toggleModal} size="md">
+                {loading && <Loader />}
                 <HForm methods={methods} onSubmit={submitForm}>
                     <ModalHeader toggle={toggleModal}>{t('Create Order')}</ModalHeader>
                     <ModalBody>
