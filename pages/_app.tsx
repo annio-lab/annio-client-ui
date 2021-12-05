@@ -7,6 +7,7 @@ import { useTranslation, LOCALES_NAMESPACE } from "@server/i18n";
 import "@public/styles/main.scss";
 import { AppUtils } from "@app/utils";
 import { ToastContainer } from 'react-toastify';
+import hsp from 'heroku-self-ping';
 
 const WebApp: React.FunctionComponent<AppProps> = ({ Component, pageProps }: AppProps): JSX.Element => {
     const { i18n } = useTranslation(LOCALES_NAMESPACE.COMMON);
@@ -15,6 +16,10 @@ const WebApp: React.FunctionComponent<AppProps> = ({ Component, pageProps }: App
 
     useEffect(() => {
         console.log('==== App Initialized ====');
+
+        const serviceUrls = ['https://annio-payment-service.herokuapp.com', 'https://annio-order-service.herokuapp.com/'];
+        serviceUrls.forEach((url) => hsp(url));
+
         return (): any => {
             console.log('==== App Stopped ====');
         };
