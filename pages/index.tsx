@@ -1,14 +1,14 @@
 // @flow
 import { NextPage } from "next";
 import { LOCALES_NAMESPACE, useTranslation } from "@server/i18n";
-import { BodyLayout } from "@shared/components";
 import { useState, useEffect, useMemo } from "react";
-import { OrderServices } from "@app/services";
-import { ORDER_STATUS } from "@annio/core/business/order/order.common";
-import { IOrder } from "@annio/core/business/order/order.interface";
 import { Badge, Button } from "reactstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
+import { ORDER_STATUS } from "@annio/core/business/order/order.common";
+import { IOrder } from "@annio/core/business/order/order.interface";
+import { OrderServices } from "@app/services";
 import { CreateOrderModal } from "@app/components";
+import { BodyLayout } from "@shared/components";
 
 const FeedPage: NextPage<any> = () => {
     const { t } = useTranslation();
@@ -18,7 +18,7 @@ const FeedPage: NextPage<any> = () => {
     const fetchAllOrders = (): Promise<any> => {
         setLoading(true);
         return OrderServices.getAll().then((res: IOrder[]) => {
-            setData(res);
+            setData(res ?? []);
         }).finally(() => setLoading(false));
     };
 
@@ -26,6 +26,7 @@ const FeedPage: NextPage<any> = () => {
         setLoading(true);
         return OrderServices.cancel(id).then((res: boolean) => {
             res && alert(`cancel order (${id}) successfully !`);
+            fetchAllOrders();
         }).finally(() => setLoading(false));
     };
 
@@ -33,6 +34,7 @@ const FeedPage: NextPage<any> = () => {
         setLoading(true);
         return OrderServices.checkStatus(id).then((res: ORDER_STATUS) => {
             res && alert(`Status of id (${id}): ${res}`);
+            fetchAllOrders();
         }).finally(() => setLoading(false));
     };
 
