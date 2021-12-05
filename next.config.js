@@ -1,4 +1,4 @@
-const { ANALYZE, PROXY_MODE, NEXT_PUBLIC_API_URL, NODE_ENV } = process.env;
+const { ANALYZE, PROXY_MODE, API_URL, NODE_ENV } = process.env;
 
 const withPlugins = require('next-compose-plugins');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
@@ -16,7 +16,7 @@ const {
 const nextConfig = {
   env: {
     PROXY_MODE,
-    NEXT_PUBLIC_API_URL,
+    API_URL,
     APP_NAME,
     APP_SHORT_NAME,
     APP_ICON,

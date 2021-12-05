@@ -38,7 +38,5 @@ app.prepare().then(() => {
             dev ? 'development' : process.env.NODE_ENV
         }`
     );
-    console.log(
-        `> API Service Server listening at ${process.env.NEXT_PUBLIC_API_URL}`
-    );
+    console.log(`> API Service Server listening at ${process.env.API_URL}`);
 });

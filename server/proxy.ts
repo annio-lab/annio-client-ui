@@ -1,6 +1,6 @@
 const devProxy: { [key: string]: {} } = {
     '/api': {
-        target: process.env.NEXT_PUBLIC_API_URL,
+        target: process.env.API_URL,
         pathRewrite: { '^/api': '' },
         changeOrigin: true,
     },

@@ -8,13 +8,14 @@ import { ORDER_STATUS } from "@annio/core/business/order/order.common";
 import { IOrder } from "@annio/core/business/order/order.interface";
 import { Badge, Button } from "reactstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
+import { CreateOrderModal } from "@app/components";
 
 const FeedPage: NextPage<any> = () => {
     const { t } = useTranslation();
     const [data, setData] = useState<IOrder[]>([]);
     const [loading, setLoading] = useState(true);
 
-    const fetchResumeInfo = (): Promise<any> => {
+    const fetchAllOrders = (): Promise<any> => {
         setLoading(true);
         return OrderServices.getAll().then((res: IOrder[]) => {
             setData(res);
@@ -84,14 +85,17 @@ const FeedPage: NextPage<any> = () => {
     ], [t]);
 
     useEffect(() => {
-        fetchResumeInfo();
+        fetchAllOrders();
     }, []);
 
     return (
         <BodyLayout loading={loading}>
-            <h2>Orders</h2>
-            <div className="d-flex action">
-                <Button color="danger" onClick={fetchResumeInfo}>Refresh Latest Orders</Button>
+            <h2>{t('Orders')}</h2>
+            <div className="d-flex justify-content-between action">
+                <Button color="danger" onClick={fetchAllOrders}>{t('Refresh Latest Orders')}</Button>
+                <CreateOrderModal onUpdateSuccess={(data) => {
+                    if (data) fetchAllOrders();
+                }} />
             </div>
             <div className="w-100 overflow-auto mt-3">
                 <BootstrapTable bootstrap4
