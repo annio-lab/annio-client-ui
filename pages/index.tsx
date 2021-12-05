@@ -9,23 +9,26 @@ import { IOrder } from "@annio/core/business/order/order.interface";
 import { OrderServices } from "@app/services";
 import { CreateOrderModal } from "@app/components";
 import { BodyLayout } from "@shared/components";
+import { toast } from "react-toastify";
 
 const FeedPage: NextPage<any> = () => {
     const { t } = useTranslation();
     const [data, setData] = useState<IOrder[]>([]);
     const [loading, setLoading] = useState(false);
 
+
     const fetchAllOrders = (): Promise<any> => {
         setLoading(true);
         return OrderServices.getAll().then((res: IOrder[]) => {
-            setData(res ?? []);
+            setData([]);
+            setData(res);
         }).finally(() => setLoading(false));
     };
 
     const cancelOrder = (id: string): Promise<any> => {
         setLoading(true);
         return OrderServices.cancel(id).then((res: boolean) => {
-            res && alert(`cancel order (${id}) successfully !`);
+            res && toast.success(`cancel order (${id}) successfully !`);
             fetchAllOrders();
         }).finally(() => setLoading(false));
     };
@@ -33,7 +36,7 @@ const FeedPage: NextPage<any> = () => {
     const checkOrderStatus = (id: string): Promise<any> => {
         setLoading(true);
         return OrderServices.checkStatus(id).then((res: ORDER_STATUS) => {
-            res && alert(`Status of id (${id}): ${res}`);
+            res && toast.success(`Status of id (${id}): ${res}`);
         }).finally(() => setLoading(false));
     };
 
